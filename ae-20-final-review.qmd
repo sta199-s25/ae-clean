@@ -1,0 +1,143 @@
+---
+title: "AE 20: a dataset's life"
+---
+
+```{r}
+#| message: false
+library(tidyverse)
+library(tidymodels)
+```
+
+If you are like me, you are sick of the penguins at this point. So for our last act, let's banish them to worlds beyond. I packed all of those lil' beasts onto a rocket ship and took them to both Mars and Venus, where I recorded their weights (in pounds). I then abandoned the ship to hurtle through space so that future stawanana students never have to study them again. 
+
+# Preparation 
+
+## Load the data 
+
+I have two sets of measurements for the same sample of penguins: one set taken on Mars, and another on Venus. They are contained in two separate files that need to be merged:
+
+```{r}
+#| message: false
+penguins_venus <- read_csv("data/penguins_venus.csv")
+penguins_mars <- read_csv("data/penguins_mars.csv")
+```
+
+## Merge the data 
+
+**Task**: Use an appropriate `join` function to create a new data frame called `space_penguins`:
+
+```{r}
+# add code
+```
+
+## Reshape the data 
+
+**Task**: Use an appropriate `pivot` function to create a new version of `space_penguins` where the information on the planet where the measurements were taken is its own column:
+
+```{r}
+# add code
+```
+
+
+# Exploration 
+
+## Pictures
+
+**Task**: Generate side-by-side density plots of the weights on each planet.
+
+
+```{r}
+# add code
+```
+
+## A concise set of numerical summaries
+
+**Task**: compute the mean, standard deviation, and median of weight on each planet:
+
+
+```{r}
+# add code
+```
+
+# Modeling 
+
+What is the conversion factor between weights on venus and weights on mars? If you ask a physicist, I'm pretty sure they will tell you it's this:
+
+$$
+mars~weight~(lb)\approx venus~weight~(lb)\times 0.41.
+$$
+
+So, you weigh less on Mars than you do on Venus. If we didn't already know this, could we learn it from our data? Note that is is not a foregone conclusion, because our data are *noisy*. The weights have been measured *with error*, and so what should be a perfect straight line relationship won't be, exactly.
+
+## Linear 
+
+**Task**: Create a scatterplot of Venus weights versus Mars weights, and add a line of best fit:
+
+
+```{r}
+# add code
+```
+
+**Task**: Compute the estimated slope and intercept of the best fit line:
+
+
+```{r}
+# add code
+```
+
+
+## Logistic
+
+**Task**: fit a logistic regression that predicts the probability of a measurement being taken on mars from the weight:
+
+```{r}
+# add code
+```
+
+
+**Task**: generate the ROC curve for this model:
+
+```{r}
+# add code
+```
+
+
+# Inference
+
+Back to linear regression now...
+
+## Interval estimation
+
+**Task**: Compute, visualize, and interpret a 95% confidence interval for the slope of the regression line:
+
+
+```{r}
+# add code
+```
+
+
+## Hypothesis testing
+
+**Task**: Test the following hypotheses at the 5% level:
+
+$$
+\begin{aligned}
+H_0&:\beta_1=0\\
+H_A&:\beta_1\neq0
+\end{aligned}
+$$
+
+```{r}
+# add code
+```
+
+**Task**: Test the following hypotheses at the 5% level:
+
+$$
+\begin{aligned}
+H_0&:\beta_1=0.41\\
+H_A&:\beta_1\neq0.41
+\end{aligned}
+$$
+
+# BONUS: regression through the origin
